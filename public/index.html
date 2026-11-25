@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smart To-Do List - organize your day and stay productive." />
+  <title>TaskFlow — Smart To-Do List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✓</span><span>Task<span class="brand-light">Flow</span></span></a>
+      <p class="side-label">WORKSPACE</p>
+      <nav class="nav-list" aria-label="Task filters">
+        <button class="nav-item active" data-filter="all"><span>▦</span> All tasks <span class="nav-count" id="allCount">0</span></button>
+        <button class="nav-item" data-filter="pending"><span>◷</span> Pending</button>
+        <button class="nav-item" data-filter="completed"><span>✓</span> Completed</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="focus-card">
+          <div class="focus-icon">✦</div>
+          <strong>Stay focused</strong>
+          <p>Small steps every day lead to big results.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">S</div>
+          <div><strong>My Workspace</strong><small>Personal planner</small></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><span class="eyebrow">YOUR PERSONAL WORKSPACE</span><h1>Good things start with a plan.</h1><p class="subtitle" id="todayText">Make today count, one task at a time.</p></div>
+        <div class="top-actions"><span class="date-chip" id="dateChip"></span><div class="top-avatar">S</div></div>
+      </header>
+
+      <section class="stats-grid" aria-label="Task statistics">
+        <article class="stat-card"><div class="stat-top"><span>Total tasks</span><span class="stat-icon purple">▦</span></div><strong id="totalStat">0</strong><small>Tasks in your workspace</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div><strong id="completedStat">0</strong><small>Things you've accomplished</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Pending</span><span class="stat-icon orange">◷</span></div><strong id="pendingStat">0</strong><small>Still on your list</small></article>
+        <article class="stat-card progress-card"><div class="stat-top"><span>Progress</span><span class="stat-icon blue">↗</span></div><strong id="progressStat">0%</strong><div class="progress-track"><div id="progressBar"></div></div></article>
+      </section>
+
+      <section class="task-section">
+        <div class="section-heading"><div><span class="eyebrow">PLAN & PRIORITIZE</span><h2 id="listHeading">All tasks</h2></div><span class="task-total" id="visibleCount">0 tasks</span></div>
+        <form id="taskForm" class="composer">
+          <div class="composer-main"><span class="plus">＋</span><input id="taskTitle" type="text" maxlength="120" placeholder="What needs to get done?" aria-label="Task title" required /></div>
+          <div class="composer-details">
+            <input id="taskDescription" type="text" maxlength="500" placeholder="Add a short note (optional)" aria-label="Task description" />
+            <select id="taskPriority" aria-label="Priority"><option>Medium</option><option>High</option><option>Low</option></select>
+            <input id="taskDueDate" type="date" aria-label="Due date" />
+            <button class="add-button" type="submit">＋ Add task</button>
+          </div>
+        </form>
+
+        <div class="toolbar"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search tasks..." aria-label="Search tasks" /></label><select id="sortSelect" class="sort-select" aria-label="Sort tasks"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="priority">Priority</option><option value="due">Due date</option></select></div>
+        <div id="message" class="message" role="status"></div>
+        <div id="taskList" class="task-list"><div class="loading">Loading your tasks...</div></div>
+      </section>
+      <footer>Made for better days <span>✦</span> TaskFlow To-Do List</footer>
+    </main>
+  </div>
+
+  <dialog id="editDialog" class="edit-dialog">
+    <form id="editForm" method="dialog">
+      <div class="dialog-heading"><div><span class="eyebrow">UPDATE YOUR PLAN</span><h2>Edit task</h2></div><button class="close-button" type="button" id="closeDialog" aria-label="Close">×</button></div>
+      <input type="hidden" id="editId" />
+      <label>Task title<input id="editTitle" maxlength="120" required /></label>
+      <label>Description<textarea id="editDescription" maxlength="500" rows="3"></textarea></label>
+      <div class="form-row"><label>Priority<select id="editPriority"><option>Low</option><option>Medium</option><option>High</option></select></label><label>Due date<input id="editDueDate" type="date" /></label></div>
+      <button class="add-button full-button" type="submit">Save changes</button>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
